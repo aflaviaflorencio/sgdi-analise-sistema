@@ -1,59 +1,85 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<div class="form-card">
+
+
 <h2>Detalhes da Demanda #{{ demanda[0] }}</h2>
 
-<div style="border:1px solid #ccc; padding:15px; margin-bottom:20px; border-radius:8px;">
-
+<div class="form-group">
     <h3>{{ demanda[1] }}</h3>
-
-    <p><strong>Descrição:</strong></p>
-    <p>{{ demanda[2] }}</p>
-    
-    <p><strong>Solicitante:</strong> {{ demanda[3] }}</p>
-    <p><strong>Data de Criação:</strong> {{ demanda[4] }}</p>
-
-   
-    <p>
-        <strong>Prioridade:</strong> 
-        <span class="
-            {% if demanda[5] == 'Alta' %}alta
-            {% elif demanda[5] == 'Media' %}media
-            {% else %}baixa
-            {% endif %}
-        ">
-            {{ demanda[5] }}
-        </span>
-    </p>
-    
-    <br>
-    <a href="/editar/{{ demanda[0] }}"><button>Editar</button></a>
-    <a href="/"><button>Voltar</button></a>
 </div>
+
+<div class="form-group">
+    <label>Descrição</label>
+    <p>{{ demanda[2] }}</p>
+</div>
+
+<div class="form-row">
+    <div class="form-group">
+        <label>Solicitante</label>
+        <input type="text" value="{{ demanda[3] }}" disabled class="input-disabled">
+    </div>
+
+    <div class="form-group">
+        <label>Data de Criação</label>
+
+        <input type="text" value="{{ data_formatada }}" disabled class="input-disabled">
+    </div>
+</div>
+
+<div class="form-group">
+    <label>Prioridade</label>
+    <span class="
+        {% if demanda[5] == 'Alta' %}alta
+        {% elif demanda[5] == 'Media' %}media
+        {% else %}baixa
+        {% endif %}
+    ">
+        {{ demanda[5] }}
+    </span>
+</div>
+
+<div class="form-actions">
+    <a href="/editar/{{ demanda[0] }}" class="btn-primary">Editar</a>
+    <a href="/" class="btn-secondary">Voltar</a>
+</div>
+
+
+</div>
+
+
+
+<div class="form-card">
 
 <h3>Comentários</h3>
 
 {% for comentario in comentarios %}
-<div style="background:#f0f0f0; padding:10px; margin:10px 0; border-radius:6px;">
-    <p><strong>{{ comentario[3] }}</strong> em {{ comentario[4] }}</p>
+<div style="background:#f7f9fc; padding:12px; margin:10px 0; border-radius:8px;">
+    <p>
+        <strong>{{ comentario[3] }}</strong> 
+        <small style="color:#888;">em {{ comentario[4] }}</small>
+    </p>
     <p>{{ comentario[2] }}</p>
 </div>
 {% endfor %}
 
-<h4>Adicionar Comentário</h4>
+<h4 style="margin-top:20px;">Adicionar Comentário</h4>
+
 <form method="POST" action="/adicionar_comentario/{{ demanda[0] }}">
-    <div>
-        <label>Seu nome:</label><br>
-        <input type="text" name="autor">
+
+
+    <div class="form-group">
+        <label>Comentário</label>
+        <textarea name="comentario" rows="4" required></textarea>
     </div>
 
-    <div>
-        <label>Comentário:</label><br>
-        <textarea name="comentario" rows="4"></textarea>
-    </div>
+    <button type="submit" class="btn-primary">Enviar Comentário</button>
 
-    <br>
-    <button type="submit">Enviar Comentário</button>
 </form>
+
+
+</div>
 
 {% endblock %}

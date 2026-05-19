@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h2>Login</h2>
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Login</h2>
+        <p>Acesse sua conta</p>
 
-    <form method="POST">
-        <input type="text" name="nome" placeholder="Usuário" required>
-        <input type="password" name="senha" placeholder="Senha" required>
-        <button type="submit">Entrar</button>
-    </form>
+        <form method="POST">
+            <input type="text" name="nome" placeholder="Usuário" required>
+            <input type="password" name="senha" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+        </form>
 
-    <p>
-        Não tem conta?
-        <a href="/cadastro">Cadastre-se</a>
-    </p>
+        <div class="auth-link">
+            Não tem conta? <a href="/cadastro">Cadastre-se</a>
+        </div>
+    </div>
 </div>
 {% endblock %}
